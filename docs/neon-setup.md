@@ -178,7 +178,7 @@ Follow-up verification confirmed normal access without a DNS override: the machi
 
 The shared desktop/mobile header navigation sends Pay to `/pay` and For Creators to `/for-creators`, following the user’s later correction to keep service-information navigation inside Mavi Finans. Explicit product visit links remain separate.
 
-The website follow-up adds Handlr to pricing and the product footer, with a dedicated `/handlr` page. `/for-creators` now shows Live, links to the live product, and describes current one-off support and marginal fees from Handlr’s live pricing page. `/for-creator` redirects to the existing plural route. Features 05 and 06 use “Financial partner processing” and “mavi Connect” as requested; the separate payment applications were not modified.
+The website follow-up adds Handlr to pricing and the product footer, with a dedicated `/handlr` page. `/for-creators` now shows Live, links to the live product, and describes current one-off support and marginal fees from Handlr’s live pricing page. `/for-creator` redirects to the existing plural route. Features 05 and 06 use the user’s subsequently corrected “financial processing partner” and “mavi Connect” terminology; the separate payment applications were not modified.
 
 The subsequent requested refinements give all five pricing cards equal heights and aligned internal rows/actions, use Mavi Pay blue (#45B1E8) and Handlr’s dark-palette mint (#7FE6CF), and shorten Handlr’s fee copy to a fair platform fee from 1% to a maximum of 3%. Handlr copy includes “Your creator payments, handled by Handlr.” Browser icon metadata explicitly uses the existing Mavi SVG, with cache versioning and 48px/180px PNG exports of the same artwork for compatibility.
 

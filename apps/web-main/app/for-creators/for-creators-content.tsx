@@ -49,7 +49,7 @@ const features = [
     number: "05",
     title: "Built on mavi pay",
     description:
-      "Financial partner processing through mavi pay, with clear fees and reliable payment handling.",
+      "Mavi Pay is Handlr’s financial processing partner, with clear fees and reliable payment handling.",
   },
   {
     number: "06",
