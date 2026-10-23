@@ -1,0 +1,6 @@
+interface:
+  display_name: "Project Security Review"
+  short_description: "Security checks during coding and after each change"
+  default_prompt: "Use $project-security-review during coding and after each completed code change; report findings, verification, and unavailable checks."
+policy:
+  allow_implicit_invocation: true

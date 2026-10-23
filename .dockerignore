@@ -17,6 +17,7 @@ dist/
 .gitattributes
 
 # IDE
+.agents/
 .vscode/
 .idea/
 *.swp
