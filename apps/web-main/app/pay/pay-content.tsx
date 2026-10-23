@@ -22,9 +22,9 @@ const stagger = {
 const features = [
   {
     number: "01",
-    title: "2% transaction fee",
+    title: "Free or Pro. Your choice.",
     description:
-      "Industry standard is 4% or more. mavi pay keeps it simple and fair.",
+      "Free: 5% per sale for personal accounts, 4% for businesses. Pro: €9/month + 3% for personal accounts, €29/month + 2% for businesses. Payment gateway fees apply separately. Paid plans and launch rates are provisional.",
   },
   {
     number: "02",

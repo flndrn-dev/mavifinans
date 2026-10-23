@@ -37,13 +37,13 @@ const products: PricingProduct[] = [
     tiers: [
       {
         name: "Free",
-        price: "2% per transaction",
-        description: "Everything you need to accept payments.",
+        price: "€0/mo",
+        description: "5% per sale for personal accounts; 4% for businesses.",
       },
       {
         name: "Pro",
-        price: "\u20AC9.99/mo",
-        description: "Lower transaction rates and priority support.",
+        price: "€9–€29/mo",
+        description: "Personal: €9/mo + 3% per sale. Business: €29/mo + 2%.",
       },
     ],
   },
@@ -259,6 +259,9 @@ export function PricingContent() {
             );
           })}
         </div>
+        <p className="mx-auto mt-6 max-w-5xl text-center text-xs leading-relaxed" style={{ color: "#8899aa" }}>
+          Mavi Pay paid plans and launch rates are provisional. Payment gateway fees apply separately.
+        </p>
       </motion.section>
 
       {/* CTA */}

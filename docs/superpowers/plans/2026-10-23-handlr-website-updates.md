@@ -7,3 +7,5 @@
 5. Commit the intended website files and push main. Observe the matching Dokploy deployment on the existing Mavi Finans production website service, then verify the live routes and HTTPS. Record any remaining access failures accurately.
 
 Review focus: both navigation layouts share the link configuration; new pages must be included in Git and the sitemap; displayed Handlr fees use marginal bands rather than a flat percentage; unavailable recurring support must not be advertised; copy changes do not imply a backend payment integration was implemented.
+
+Follow-up correction: restore internal navbar destinations `/pay` and `/for-creators`. Match Mavi Pay personal/business Free and Pro rates to the separate project’s fee engine and pricing page, including the user-confirmed €9/€29 monthly prices, and remove the inconsistent blanket 2% claim from the service page and metadata. Verify the build, both internal routes, all four rate combinations, and the matching live deployment.

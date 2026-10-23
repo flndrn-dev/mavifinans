@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Logo } from '@/components/logo';
 
 const productLinks = [
-  { label: 'Pay', href: 'https://mavipay.eu' },
-  { label: 'For Creators', href: 'https://handlr.sh' },
+  { label: 'Pay', href: '/pay' },
+  { label: 'For Creators', href: '/for-creators' },
   { label: 'Card', href: '/card' },
   { label: 'Wallet', href: '/wallet' },
   { label: 'Banking', href: '/banking' },
