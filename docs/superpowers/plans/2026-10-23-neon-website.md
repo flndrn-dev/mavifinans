@@ -35,4 +35,4 @@
 
 - [x] Inspect the existing Mavi Finans website project, service, environment and server at admin.loowii.com using authenticated access. Reuse the exact target that hosts mavifinans.sh.
 - [x] Verify the repository/build source, publish the local changes, configure the existing website service's Neon Function URL and origin secret, and deploy via Dokploy.
-- [ ] Move mavifinans.eu onto the same verified server, verify HTTPS/pages/form persistence, then remove the old mavifinans.sh website routing/configuration.
+- [x] Move mavifinans.eu onto the same verified server, verify HTTPS/pages/form persistence, then remove the old mavifinans.sh website routing/configuration.

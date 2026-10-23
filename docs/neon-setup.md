@@ -151,4 +151,26 @@ In Hostinger's mavifinans.eu DNS zone, only the apex A record was changed from `
 
 ### HTTPS and cutover verification
 
-The mavifinans.eu route is configured with HTTPS and Let's Encrypt. Public certificate issuance and live form checks are in progress; a configured certificate provider alone is not proof of a valid certificate. No TLS verification bypass is used. Final verification results and old-domain cleanup will be recorded here after the new HTTPS endpoint passes.
+Both mavifinans.eu and www.mavifinans.eu return HTTP/2 200 on the verified server with normal certificate validation enabled. HTTP redirects to HTTPS with status 308. Let’s Encrypt issued separate valid certificates for the two names:
+
+```text
+subject: CN=mavifinans.eu
+issuer: C=US; O=Let's Encrypt; CN=YR2
+expire date: Jan 21 13:08:32 2027 GMT
+subjectAltName: host "mavifinans.eu" matched cert's "mavifinans.eu"
+SSL certificate verify ok.
+HTTP/2 200
+```
+
+The www certificate expires Jan 21 13:08:30 2027 GMT and also passed hostname and certificate verification.
+
+The first certificate attempt happened before the DNS cutover and failed because the ACME challenge reached the former address, 187.124.64.116. After the apex DNS change and route reconciliation, both certificates passed verification. No certificate verification was disabled and no browser security interstitial was bypassed.
+
+The full verification suite passed against the live HTTPS website: homepage, waitlist and contact pages, sitemap domain, authenticated Function access, real Postgres writes, matching private JSON archives, duplicate/retry behavior, invalid inputs, private-object access, and durable quotas. Only synthetic test records/objects from the verification run were removed. Outbound email was not configured in the live website environment.
+
+Because this machine’s configured resolver still cached the former address during verification, the final live test used an explicit lookup for the authoritative address, equivalent to curl --resolve. The URL, hostname/SNI and default certificate validation remained https://mavifinans.eu. The Function, database and storage requests used their normal DNS paths. The authoritative server, Cloudflare and Google DNS already returned 187.124.209.17. Other caches can retain the previous record for up to its original 3600-second TTL; such clients may temporarily reach the former server and see its certificate error until that cache expires.
+
+Dokploy’s refreshed domain list contains only mavifinans.eu and www.mavifinans.eu, both on port 3000 with HTTPS/Let’s Encrypt enabled. The old mavifinans.sh route is absent and that URL returns 404 instead of serving the website. The service description was updated to “Main mavifinans.eu website — Neon backend.” The independent staff DNS record and other product services were preserved.
+
+Automatic deployment was proven by pushing documentation commit 13fa58e46df0f2d2ae0e28cc21391720c4135f30 to main and observing a matching new Dokploy deployment with status Done (2 seconds), without a manual deploy action. The final documentation update is also pushed to main and must reach Done before handoff.
+
