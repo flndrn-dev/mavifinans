@@ -260,7 +260,7 @@ export function PricingContent() {
           })}
         </div>
         <p className="mx-auto mt-6 max-w-5xl text-center text-xs leading-relaxed" style={{ color: "#8899aa" }}>
-          Mavi Pay paid plans and launch rates are provisional. Payment gateway fees apply separately.
+          Paid plans and launch rates for mavi pay are provisional. Payment gateway fees apply separately.
         </p>
       </motion.section>
 
