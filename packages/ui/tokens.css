@@ -1,0 +1,40 @@
+/* mavi finans Design Tokens */
+
+@layer base {
+  :root {
+    /* Typography */
+    --mavi-font-display: 'Clash Display', sans-serif;
+    --mavi-font-body: 'General Sans', sans-serif;
+    --mavi-font-mono: 'JetBrains Mono', monospace;
+
+    /* Core backgrounds */
+    --mavi-bg: #192428;
+    --mavi-bg-surface: #2d383c;
+    --mavi-bg-elevated: #414c50;
+
+    /* Brand blues */
+    --mavi-blue: #45b1e8;
+    --mavi-blue-dark: #0784b5;
+
+    /* Text */
+    --mavi-text: #cfd0d1;
+    --mavi-text-muted: #8899aa;
+
+    /* Derived / utility */
+    --mavi-blue-glow: rgba(69, 177, 232, 0.30);
+    --mavi-blue-subtle: rgba(69, 177, 232, 0.10);
+    --mavi-border: rgba(69, 177, 232, 0.18);
+    --mavi-border-strong: rgba(69, 177, 232, 0.40);
+
+    /* Status */
+    --mavi-success: #22C55E;
+    --mavi-warning: #F59E0B;
+    --mavi-error: #EF4444;
+
+    /* Per-product accent overrides */
+    --mavi-pay-accent: #E05C45;
+    --mavi-card-accent: #0784b5;
+    --mavi-wallet-accent: #45b1e8;
+    --mavi-finans-accent: #45b1e8;
+  }
+}

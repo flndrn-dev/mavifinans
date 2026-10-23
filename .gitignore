@@ -1,0 +1,34 @@
+node_modules/
+.next/
+.turbo/
+dist/
+.env
+.env.local
+.env.*.local
+.env.production
+.env.*.production
+.DS_Store
+*.tsbuildinfo
+.expo/
+android/
+ios/
+*.apk
+
+# Python (pay backend)
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+
+# Internal instructions — not for public repo
+CLAUDE.md
+.neon
+
+# Local archives of the former ecosystem checkout; separate product repositories.
+/handlr/
+/pay/
+/assets/
+/apps/mobile/
+/.deepseek/
+/.pnpm-store/
+/infra/coolify/web-pay/

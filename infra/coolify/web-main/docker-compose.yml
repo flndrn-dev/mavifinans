@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  web-main:
+    build:
+      context: ../../../
+      dockerfile: apps/web-main/Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - NEON_FUNCTION_WEBSITE_BASE_URL=${NEON_FUNCTION_WEBSITE_BASE_URL:?Set the Neon website Function URL}
+      - MAVI_ORIGIN_SECRET=${MAVI_ORIGIN_SECRET:?Set the same secret deployed to the Neon Function}
+      - RESEND_API_KEY=${RESEND_API_KEY}
+      - RESEND_AUDIENCE_ID=${RESEND_AUDIENCE_ID}
+      - CONTACT_FROM_EMAIL=${CONTACT_FROM_EMAIL:-mavi finans <noreply@mavifinans.eu>}
+      - CONTACT_TO_EMAIL=${CONTACT_TO_EMAIL:-hello@mavifinans.eu}
+      - NEXT_PUBLIC_UMAMI_WEBSITE_ID=${NEXT_PUBLIC_UMAMI_WEBSITE_ID}
+      - NEXT_PUBLIC_UMAMI_URL=${NEXT_PUBLIC_UMAMI_URL}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.web-main.rule=Host(`mavifinans.eu`)"
+      - "traefik.http.routers.web-main.tls.certresolver=letsencrypt"
+      - "traefik.http.services.web-main.loadbalancer.server.port=3000"
+    restart: unless-stopped

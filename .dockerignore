@@ -1,0 +1,64 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+.next/
+dist/
+.turbo/
+
+# Cache
+.cache/
+*.tsbuildinfo
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Docs & specs (not needed at runtime)
+docs/
+*.md
+!README.md
+
+# Tests
+**/__tests__/
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+
+# Large assets (keep only what's needed)
+*.psd
+*.sketch
+*.fig
+assets/source/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Misc
+solo.yml
+conductor.json
+fase*.config.json
+flake.nix
+flake.lock
+pyrightconfig.json
+mavi.code-workspace
