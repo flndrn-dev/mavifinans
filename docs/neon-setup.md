@@ -105,7 +105,7 @@ ALL NEON WEBSITE END-TO-END CHECKS PASSED
 Cleanup complete: only this run's synthetic rows and objects removed.
 ```
 
-These checks sent requests through the running Next.js app and independently queried Postgres/downloaded the S3 archive; they did not substitute mocks. Browser interaction testing was unavailable because no browser was connected.
+These checks sent requests through the running Next.js app and independently queried Postgres/downloaded the S3 archive; they did not substitute mocks. The initial service tests used HTTP requests. Later deployment configuration used the authenticated native Chrome UI, while GitHub and Hostinger DNS were managed through the signed-in Brave session.
 
 ## Issues encountered
 
@@ -119,16 +119,36 @@ These checks sent requests through the running Next.js app and independently que
 - pnpm reported pre-existing mobile React peer warnings and skipped optional package build scripts. The website build and live service checks passed.
 - node-postgres reports a forward-compatibility warning about `sslmode=require`; the current driver applies full certificate verification. No TLS checks were disabled.
 
-## Dokploy deployment handoff
+## Live deployment
 
-The user requested reuse of the Mavi Finans project at `https://admin.loowii.com` and the same service/server currently hosting `mavifinans.sh`, with the new domain `mavifinans.eu`. Once the replacement is verified, remove the old website's `.sh` routing/configuration. Do not modify independent Pay/handlr services or provision the future staff portal as part of this task.
+The dedicated website repository is https://github.com/flndrn-dev/mavifinans, branch `main`. The local folder tracks GitHub origin/main. The former Codeberg history is preserved locally as `archive/codeberg-main`, with its remote named `legacy-codeberg`; it was not published to the dedicated website repository. Separate product source folders remain local and are excluded from this website repository.
 
-At inspection time, `.sh` resolved to `187.124.209.17` and returned HTTPS 200; `.eu` resolved to `187.124.64.116` and failed certificate verification. Server selection must be verified in Dokploy before mutation; DNS alone does not establish the service's server ID.
+| Target | Verified value |
+| --- | --- |
+| Dokploy | https://admin.loowii.com |
+| Project | Mavi Finans / `kTsyoKgSNLmgqxDTksb3r` |
+| Environment | production / `J1ejqq1tt_Spl4IF15xAM` |
+| Application | mavifinans-web / `KQ_sBIICqWoCWWgOW2FDG` |
+| Server | built-in Dokploy Server, `187.124.209.17` |
+| App identifier | `app-calculate-wireless-capacitor-r5c3le` |
+| GitHub source | flndrn-dev/mavifinans, main, On Push |
+| Auto-deploy | enabled |
+| Dockerfile | `apps/web-main/Dockerfile` |
+| Docker context | repository root (`.`) |
+| Main domain | mavifinans.eu, port 3000, HTTPS with Let's Encrypt |
 
-No Dokploy API credentials or connected browser were available in this session, so no Dokploy service, domain, server, Git deployment source or DNS setting was changed. The existing `.sh` site remains running. The local source changes have not yet been committed/pushed; Dokploy's existing remote branch cannot deploy these uncommitted files.
+The existing Mavi Finans website service was reused on its verified existing server. The Hostinger VPS whose display name is mavifinans.sh has a different address (`187.124.64.116`); that VPS was not selected or changed. The website's own existing server, confirmed in Dokploy's Web Server settings and the original .sh DNS, is `187.124.209.17`.
 
-Chrome recovery diagnostics confirmed Chrome running, the ChatGPT extension enabled in the Default profile, and a valid native-host manifest. The supported fresh-window recovery was approved and attempted, but the browser client still returned `Browser is not available: chrome`. The user is reconnecting Chrome after reinstalling the Browser plugin; live deployment remains pending authenticated access.
+With the user's explicit approval, the existing GitHub app `Dokploy-2026-04-29-f2bu6m` was granted access to only the new `mavifinans` repository in addition to its prior 11 selections. No other repository permissions were changed.
 
-The final standalone startup returned `Ready in 0ms` on `http://127.0.0.1:3010`; the complete end-to-end verification passed again against that server with no standalone startup warning.
+The website's existing HOSTNAME, PORT and Umami environment settings were preserved. The Function URL and matching origin secret were added from the ignored local environment file. The website container does not receive Postgres or Object Storage credentials. Dokploy showed `Environments Added` after saving.
 
-Once authenticated access is available: identify the existing website service/server/build source, preserve its other environment values, configure `NEON_FUNCTION_WEBSITE_BASE_URL` and the same `MAVI_ORIGIN_SECRET` from ignored `.env.local`, publish the exact local changes through the verified source, deploy to the existing server, point `.eu` DNS there, verify HTTPS/pages/form persistence, then remove the old `.sh` website route. The updated website Compose manifest already expects the two server-only variables and the `.eu` host. The Neon database/storage credentials are only required in the Function, not in the website container.
+Application code commit `d4abe616d10106fe1fd5c572d61d3f1ba11490c6` was committed and pushed to GitHub main. Dokploy's deployment records show `Done` for that commit, including the initial 56-second build and a cached 2-second deployment. The running application exposes the Stop action in Dokploy.
+
+The production linux/amd64 Docker image was independently built from the clean GitHub checkout. The build completed TypeScript and generated all 24 pages. The resulting image was started on local port 3011 with the same two website environment settings; the full Postgres, private storage, Function authentication, retry and quota verification suite passed against that container, then removed its synthetic records and files.
+
+In Hostinger's mavifinans.eu DNS zone, only the apex A record was changed from `187.124.64.116` to `187.124.209.17`, with TTL 300. The www CNAME to mavifinans.eu and the independent staff A record at `187.124.64.116` were preserved. Both the authoritative nameserver and Cloudflare's public resolver returned the new address. Some cached resolvers still returned the old address immediately after the change.
+
+### HTTPS and cutover verification
+
+The mavifinans.eu route is configured with HTTPS and Let's Encrypt. Public certificate issuance and live form checks are in progress; a configured certificate provider alone is not proof of a valid certificate. No TLS verification bypass is used. Final verification results and old-domain cleanup will be recorded here after the new HTTPS endpoint passes.
