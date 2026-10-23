@@ -172,5 +172,4 @@ Because this machine’s configured resolver still cached the former address dur
 
 Dokploy’s refreshed domain list contains only mavifinans.eu and www.mavifinans.eu, both on port 3000 with HTTPS/Let’s Encrypt enabled. The old mavifinans.sh route is absent and that URL returns 404 instead of serving the website. The service description was updated to “Main mavifinans.eu website — Neon backend.” The independent staff DNS record and other product services were preserved.
 
-Automatic deployment was proven by pushing documentation commit 13fa58e46df0f2d2ae0e28cc21391720c4135f30 to main and observing a matching new Dokploy deployment with status Done (2 seconds), without a manual deploy action. The final documentation update is also pushed to main and must reach Done before handoff.
-
+Automatic deployment was proven by pushing documentation commit 13fa58e46df0f2d2ae0e28cc21391720c4135f30 to main and observing a matching new Dokploy deployment with status Done (2 seconds), without a manual deploy action. Documentation-only updates use the same verified On Push deployment configuration.
