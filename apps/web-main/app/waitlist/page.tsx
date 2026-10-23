@@ -10,7 +10,7 @@ const emailSchema = z.string().email("Please enter a valid email address.");
 
 const productOptions = [
   { id: "pay", label: "mavi pay", accent: "#E05C45" },
-  { id: "creators", label: "supported by", accent: "#45b1e8" },
+  { id: "creators", label: "Handlr", accent: "#7FE6CF" },
   { id: "card", label: "mavi card", accent: "#0784b5" },
   { id: "wallet", label: "mavi wallet", accent: "#45b1e8" },
   { id: "finans", label: "mavi finans", accent: "#45b1e8" },

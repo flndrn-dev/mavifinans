@@ -8,7 +8,7 @@ const products = [
     name: "mavi pay",
     tagline: "Accept payments. Get paid instantly.",
     description:
-      "Merchant payment processing with competitive rates. Stripe-powered checkout, instant payouts, and a full dashboard to manage your business.",
+      "Merchant payment processing with competitive rates. Financial partner processing and a full dashboard to manage your business.",
     href: "/pay",
     status: "live" as const,
     accentColor: "#45b1e8",
@@ -17,10 +17,10 @@ const products = [
     name: "Handlr",
     tagline: "Let your audience fund your work.",
     description:
-      "A creator funding platform. One-time and recurring support, your own page at handlr.sh, embeddable widgets, and 0% platform fee.",
-    href: "/for-creators",
+      "Your creator payments, handled by Handlr. A free branded page for one-off audience support, with a fair platform fee from 1% to a maximum of 3%.",
+    href: "/handlr",
     status: "live" as const,
-    accentColor: "#FF6240",
+    accentColor: "#7FE6CF",
   },
   {
     name: "mavi card",

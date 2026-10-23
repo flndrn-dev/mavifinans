@@ -20,11 +20,20 @@ const stagger = {
   },
 };
 
-const products = [
+type PricingProduct = {
+  name: string;
+  accent: string;
+  status: "live" | "coming_soon";
+  href?: string;
+  tiers: { name: string; price: string; description: string }[];
+};
+
+const products: PricingProduct[] = [
   {
     name: "mavi pay",
-    accent: "#E05C45",
+    accent: "#45B1E8",
     status: "live" as const,
+    href: "https://mavipay.eu",
     tiers: [
       {
         name: "Free",
@@ -35,6 +44,24 @@ const products = [
         name: "Pro",
         price: "\u20AC9.99/mo",
         description: "Lower transaction rates and priority support.",
+      },
+    ],
+  },
+  {
+    name: "Handlr",
+    accent: "#7FE6CF",
+    status: "live",
+    href: "https://handlr.sh",
+    tiers: [
+      {
+        name: "Creator page",
+        price: "Free",
+        description: "Your creator payments, handled by Handlr.",
+      },
+      {
+        name: "Platform fee",
+        price: "1–3% per payment",
+        description: "A fair platform fee, from 1% to a maximum of 3%.",
       },
     ],
   },
@@ -124,29 +151,30 @@ export function PricingContent() {
         variants={stagger}
         className="px-6 py-24 md:py-32"
       >
-        <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2">
-          {products.map((product) => {
+        <div className="mx-auto grid max-w-5xl auto-rows-fr gap-6 sm:grid-cols-2">
+          {products.map((product, index) => {
             const isComingSoon = product.status === "coming_soon";
+            const isLastOddCard = products.length % 2 === 1 && index === products.length - 1;
 
             return (
               <motion.div
                 key={product.name}
                 variants={fadeUp}
-                className="group relative overflow-hidden rounded-2xl border backdrop-blur-xl transition-all duration-300"
+                className={`group relative flex h-full flex-col overflow-hidden rounded-2xl border backdrop-blur-xl transition-all duration-300 ${isLastOddCard ? "sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-12px)]" : ""}`}
                 style={{
                   backgroundColor: "rgba(45,56,60,0.5)",
                   borderColor: "rgba(69,177,232,0.12)",
                   opacity: isComingSoon ? 0.75 : 1,
                 }}
               >
-                {/* Accent color bar */}
+                {/* Live products share the same green status bar. */}
                 <div
-                  className="h-1"
-                  style={{ backgroundColor: product.accent }}
+                  className="h-1 shrink-0"
+                  style={{ backgroundColor: product.status === "live" ? "#22C55E" : product.accent }}
                 />
 
-                <div className="p-8">
-                  <div className="flex items-center justify-between">
+                <div className="grid flex-1 grid-rows-[3.5rem_1fr_1.25rem] gap-6 p-6 sm:p-8">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
                     <h2
                       className="text-xl font-bold"
                       style={{
@@ -158,7 +186,7 @@ export function PricingContent() {
                     </h2>
 
                     {product.status === "live" ? (
-                      <span className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
+                      <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold"
                         style={{
                           backgroundColor: "rgba(34,197,94,0.1)",
                           color: "#22C55E",
@@ -178,7 +206,7 @@ export function PricingContent() {
                       </span>
                     ) : (
                       <span
-                        className="rounded-full px-3 py-1 text-xs font-semibold"
+                        className="shrink-0 rounded-full px-3 py-1 text-xs font-semibold"
                         style={{
                           backgroundColor: "rgba(65,76,80,0.6)",
                           color: "#8899aa",
@@ -189,10 +217,10 @@ export function PricingContent() {
                     )}
                   </div>
 
-                  <div className="mt-6 space-y-5">
+                  <div className="grid grid-rows-2 gap-6">
                     {product.tiers.map((tier) => (
                       <div key={tier.name}>
-                        <div className="flex items-baseline gap-2">
+                        <div className="flex min-h-10 flex-wrap content-start items-baseline gap-x-2">
                           <span
                             className="text-sm font-semibold"
                             style={{ color: "#cfd0d1" }}
@@ -217,6 +245,15 @@ export function PricingContent() {
                       </div>
                     ))}
                   </div>
+
+                  <Link
+                    href={product.href ?? "/waitlist"}
+                    className="inline-flex items-center gap-2 text-sm font-semibold underline-offset-4 hover:underline"
+                    style={{ color: product.accent }}
+                  >
+                    {product.href ? `Visit ${product.name}` : "Join the waitlist"}
+                    {product.href && <span aria-hidden="true">↗</span>}
+                  </Link>
                 </div>
               </motion.div>
             );

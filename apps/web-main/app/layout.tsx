@@ -10,7 +10,14 @@ export const metadata: Metadata = {
     template: '%s | mavi finans',
   },
   description: 'Real bank accounts. Prepaid cards. Crypto wallet. E-commerce payments.',
-  icons: { icon: '/favicon.svg' },
+  icons: {
+    icon: [
+      { url: '/favicon.png?v=mavi-20261023', type: 'image/png', sizes: '48x48' },
+      { url: '/favicon.svg?v=mavi-20261023', type: 'image/svg+xml', sizes: 'any' },
+    ],
+    shortcut: '/favicon.svg?v=mavi-20261023',
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+  },
   metadataBase: new URL('https://mavifinans.eu'),
   openGraph: {
     type: 'website',

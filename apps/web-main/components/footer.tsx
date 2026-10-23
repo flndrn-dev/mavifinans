@@ -9,7 +9,7 @@ const columns = [
       { label: 'mavi card', href: '/card' },
       { label: 'mavi wallet', href: '/wallet' },
       { label: 'mavi finans', href: '/banking' },
-      { label: 'supported by', href: '/for-creators' },
+      { label: 'Handlr', href: '/handlr' },
     ],
   },
   {

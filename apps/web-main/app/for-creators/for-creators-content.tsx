@@ -23,39 +23,39 @@ const stagger = {
 const features = [
   {
     number: "01",
-    title: "One-time and recurring support",
+    title: "One-off audience support",
     description:
-      "Fans can buy you a coffee once or support you monthly. You decide which options to offer — flexible amounts, custom tiers, or both.",
+      "Let your audience contribute directly to your work with one-off card payments. Monthly subscriptions are not available in the current release.",
   },
   {
     number: "02",
     title: "Your own creator page",
     description:
-      "A personalised page at handlr.sh/you with your bio, links, and support options. Share one link, receive support from anywhere.",
+      "A personalised page at handlr.sh/you with your bio, avatar, cover image, and funding goals. Share one link with your audience.",
   },
   {
     number: "03",
-    title: "Embeddable widget",
+    title: "Free to create your page",
     description:
-      "Drop a \"handlr\" button or widget on your website, blog, or portfolio. One line of code, instant integration.",
+      "Sign in with your email, choose a username, and make the page your own. Complete eligible payment onboarding before accepting card support.",
   },
   {
     number: "04",
     title: "Custom support amounts",
     description:
-      "Let supporters choose their own amount or set predefined tiers. No forced pricing — your community, your rules.",
+      "Supporters can give from €1 to €10,000 in EUR when your creator page is active and your payment account is eligible to accept charges.",
   },
   {
     number: "05",
     title: "Built on mavi pay",
     description:
-      "Stripe-powered payment processing. Low fees, instant processing, and reliable payouts.",
+      "Financial partner processing through mavi pay, with clear fees and reliable payment handling.",
   },
   {
     number: "06",
     title: "Payouts to your mavi account",
     description:
-      "Withdraw to your bank account via Stripe Connect. Fast, reliable, no waiting weeks for your money.",
+      "Withdraw to your bank account via mavi Connect in mavi pay. Payout availability and timing depend on your account and financial partner.",
   },
 ];
 
@@ -82,17 +82,12 @@ const audiences = [
   },
 ];
 
-const comparison = [
-  { feature: "Platform fee", supportedBy: "0%", others: "5%" },
-  { feature: "Transaction fee", supportedBy: "2.9% + \u20AC0.30", others: "2.9% + \u20AC0.30" },
-  { feature: "Payout to bank (IBAN)", supportedBy: "Min \u20AC10 (\u20AC0 to mavi finans)", others: "\u20AC5\u2013\u20AC25" },
-  { feature: "Payout to card", supportedBy: "Min \u20AC25 (\u20AC0 to mavi card)", others: "No" },
-  { feature: "Crypto payout", supportedBy: "Min \u20AC75", others: "No" },
-  { feature: "Custom amounts", supportedBy: "Yes", others: "Limited" },
-  { feature: "Embeddable widget", supportedBy: "Yes", others: "Yes" },
+const pricingDetails = [
+  { feature: "Creator page", detail: "Free to create and personalise" },
+  { feature: "Platform fee", detail: "A fair platform fee, from 1% to a maximum of 3%." },
 ];
 
-export function ForCreatorsContent() {
+export function ForCreatorsContent({ productPage = false }: { productPage?: boolean }) {
   return (
     <div className="relative overflow-hidden">
       {/* Hero */}
@@ -106,22 +101,22 @@ export function ForCreatorsContent() {
           }}
         />
 
-        {/* Coming soon badge */}
+        {/* Live status */}
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
           className="mb-8 inline-flex items-center gap-2 overflow-hidden rounded-full border px-4 py-1.5"
           style={{
-            backgroundColor: "rgba(65,76,80,0.6)",
-            borderColor: "rgba(69,177,232,0.2)",
+            backgroundColor: "rgba(34,197,94,0.1)",
+            borderColor: "rgba(34,197,94,0.25)",
           }}
         >
           <span
             className="text-xs font-semibold"
-            style={{ color: "#8899aa" }}
+            style={{ color: "#22C55E" }}
           >
-            Coming soon
+            Live
           </span>
         </motion.div>
 
@@ -132,7 +127,7 @@ export function ForCreatorsContent() {
           className="text-4xl font-bold tracking-tight md:text-6xl lg:text-7xl"
           style={{ fontFamily: "'Clash Display', sans-serif", color: "#ffffff" }}
         >
-          supported by
+          {productPage ? "Handlr" : "For creators. Supported by Handlr."}
         </motion.h1>
 
         <motion.p
@@ -142,8 +137,9 @@ export function ForCreatorsContent() {
           className="mt-6 max-w-xl text-lg md:text-xl"
           style={{ color: "#8899aa" }}
         >
-          Let your audience fund your work. No paywall, no gatekeeping — just
-          direct support from the people who believe in what you do.
+          {productPage
+            ? "Your creator payments, handled by Handlr. Your own support page and a direct connection with the audience who helps you keep creating."
+            : "Let your audience fund your work with one-off support. Create a free Handlr page and share it with the people who believe in what you do."}
         </motion.p>
 
         <motion.p
@@ -155,6 +151,16 @@ export function ForCreatorsContent() {
         >
           By the makers of mavi finans
         </motion.p>
+        <motion.a
+          href="https://handlr.sh"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.6 }}
+          className="mt-8 inline-flex h-12 items-center justify-center rounded-xl px-8 text-sm font-semibold text-white transition-all duration-300 hover:shadow-[0_0_30px_rgba(69,177,232,0.3)]"
+          style={{ backgroundColor: "#45b1e8" }}
+        >
+          Create your Handlr page ↗
+        </motion.a>
       </section>
 
       {/* How it works visual */}
@@ -210,8 +216,8 @@ export function ForCreatorsContent() {
               style={{ color: "#8899aa" }}
             >
               Set up your creator page in minutes. Share your unique link.
-              Supporters contribute any amount they choose — one-time or
-              monthly. You get paid directly to your mavi account.
+              Complete eligible payment onboarding, then receive one-off support
+              from your audience. Track contributions and your funding goals.
             </p>
 
             {/* Mock URL */}
@@ -352,7 +358,7 @@ export function ForCreatorsContent() {
         </div>
       </motion.section>
 
-      {/* Comparison table */}
+      {/* Current Handlr pricing */}
       <motion.section
         initial="hidden"
         whileInView="visible"
@@ -368,7 +374,7 @@ export function ForCreatorsContent() {
               color: "#ffffff",
             }}
           >
-            How we compare
+            Clear creator pricing
           </h2>
 
           <div
@@ -380,7 +386,7 @@ export function ForCreatorsContent() {
           >
             {/* Header */}
             <div
-              className="grid grid-cols-3 gap-4 px-6 py-4"
+              className="grid grid-cols-[1fr_2fr] gap-4 px-6 py-4"
               style={{
                 borderBottom: "1px solid rgba(69,177,232,0.12)",
                 backgroundColor: "rgba(25,36,40,0.5)",
@@ -389,32 +395,28 @@ export function ForCreatorsContent() {
               <span
                 className="text-xs font-semibold uppercase tracking-wider"
                 style={{ color: "#8899aa" }}
-              />
+              >
+                Feature
+              </span>
               <span
-                className="text-center text-xs font-bold uppercase tracking-wider"
+                className="text-xs font-bold uppercase tracking-wider"
                 style={{
                   color: "#45b1e8",
                   fontFamily: "'Clash Display', sans-serif",
                 }}
               >
-                supported by
-              </span>
-              <span
-                className="text-center text-xs font-semibold uppercase tracking-wider"
-                style={{ color: "#8899aa" }}
-              >
-                Others
+                Handlr
               </span>
             </div>
 
             {/* Rows */}
-            {comparison.map((row, i) => (
+            {pricingDetails.map((row, i) => (
               <div
                 key={row.feature}
-                className="grid grid-cols-3 gap-4 px-6 py-3.5"
+                className="grid grid-cols-[1fr_2fr] gap-4 px-6 py-3.5"
                 style={{
                   borderBottom:
-                    i < comparison.length - 1
+                    i < pricingDetails.length - 1
                       ? "1px solid rgba(69,177,232,0.06)"
                       : "none",
                 }}
@@ -426,16 +428,10 @@ export function ForCreatorsContent() {
                   {row.feature}
                 </span>
                 <span
-                  className="text-center text-sm font-medium"
+                  className="text-sm leading-relaxed"
                   style={{ color: "#45b1e8" }}
                 >
-                  {row.supportedBy}
-                </span>
-                <span
-                  className="text-center text-sm"
-                  style={{ color: "#8899aa" }}
-                >
-                  {row.others}
+                  {row.detail}
                 </span>
               </div>
             ))}
@@ -445,7 +441,9 @@ export function ForCreatorsContent() {
             className="mt-4 text-center text-xs"
             style={{ color: "rgba(136,153,170,0.5)" }}
           >
-            Comparison with Buy Me a Coffee, Ko-fi, and similar platforms.
+            <a href="https://handlr.sh/pricing" className="underline underline-offset-4 hover:text-white">
+              See full Handlr pricing ↗
+            </a>
           </p>
         </div>
       </motion.section>
@@ -465,21 +463,21 @@ export function ForCreatorsContent() {
             color: "#ffffff",
           }}
         >
-          Ready to get supported?
+          Keep creating. Handlr handles the support.
         </h2>
         <p
           className="mx-auto mb-8 max-w-md text-sm"
           style={{ color: "#8899aa" }}
         >
-          Join the waitlist and be the first to claim your creator page when we
-          launch.
+          Handlr is live. Create your free page, make it yours, and share your
+          link with your audience.
         </p>
         <Link
-          href="/waitlist"
+          href="https://handlr.sh"
           className="inline-flex h-12 items-center justify-center rounded-xl px-10 text-sm font-semibold text-white no-underline transition-all duration-300 hover:shadow-[0_0_30px_rgba(69,177,232,0.3)]"
           style={{ backgroundColor: "#45b1e8" }}
         >
-          Join the waitlist
+          Get started on Handlr ↗
         </Link>
       </motion.section>
     </div>
